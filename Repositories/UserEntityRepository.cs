@@ -14,18 +14,6 @@ namespace Repositories
             _context = context;
         }
 
-        public User GetUserById(string id)
-        {
-            var user = _context.Users.Find(id);
-
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
-            return user;
-        }
-
         public async Task<List<User>> GetUsers()
         {
             return await _context.Users.ToListAsync();

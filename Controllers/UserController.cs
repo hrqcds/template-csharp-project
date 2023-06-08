@@ -1,18 +1,18 @@
-using Database;
-using Interfaces;
-using Models;
-using Repositories;
-using Services;
-
 namespace Controllers;
 
 public class UserController
 {
-    
-    public static async Task<IResult> GetUsers(IUserRepository userRepository)
-    {
-        var users = await userRepository.GetUsers();
+    private readonly WebApplication _app;
 
-        return Results.Ok(users);
+    public UserController(WebApplication app)
+    {
+        _app = app;
+    }
+
+    public void Call()
+    {
+
+        _app.MapGet("/", Controllers.User.List.Call).WithTags("User");
+
     }
 }

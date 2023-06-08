@@ -1,5 +1,5 @@
 using Interfaces;
-using Models;
+using Models.Dtos;
 
 namespace Services;
 
@@ -12,13 +12,10 @@ public class UserService
         _userRepository = userRepository;
     }
 
-    public User? GetUserById(string id)
+    public async Task<List<ListUserDto>> GetUsers()
     {
-        return _userRepository.GetUserById(id);
-    }
+        var users = await _userRepository.GetUsers();
 
-    public async Task<List<User>> GetUsers()
-    {
-        return await _userRepository.GetUsers();
+        return ListUserDto.ListUserResponse(users).ToList();
     }
 }
